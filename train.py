@@ -16,11 +16,11 @@ from utils import get_ids, split_ids, split_train_val, get_imgs_and_masks, batch
 def train_net(net,
               epochs=5,
               batch_size=1,
-              lr=0.1,
+              lr=0.01,
               val_percent=0.05,
               save_cp=True,
-              gpu=False,
-              img_scale=0.5):
+              gpu=True,
+              img_scale=5):
 
     dir_img = '/research/pheng5/jzwang/data/resize_train/Train/'
     dir_mask = '/research/pheng5/jzwang/data/resize_train/Train_GroundTruth/'
@@ -105,9 +105,9 @@ def get_args():
     parser = OptionParser()
     parser.add_option('-e', '--epochs', dest='epochs', default=5, type='int',
                       help='number of epochs')
-    parser.add_option('-b', '--batch-size', dest='batchsize', default=10,
+    parser.add_option('-b', '--batch-size', dest='batchsize', default=20,
                       type='int', help='batch size')
-    parser.add_option('-l', '--learning-rate', dest='lr', default=0.1,
+    parser.add_option('-l', '--learning-rate', dest='lr', default=0.01,
                       type='float', help='learning rate')
     parser.add_option('-g', '--gpu', action='store_true', dest='gpu',
                       default=True, help='use cuda')

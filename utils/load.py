@@ -36,8 +36,9 @@ def get_imgs_and_masks(ids, dir_img, dir_mask, scale):
     imgs_normalized = map(normalize, imgs_switched)
 
     masks = to_cropped_imgs(ids, dir_mask, '_segmentation.png', scale)
+    mask_normalized = map(normalize, masks)
 
-    return zip(imgs_normalized, masks)
+    return zip(imgs_normalized, mask_normalized)
 
 
 def get_full_img_and_mask(id, dir_img, dir_mask):
