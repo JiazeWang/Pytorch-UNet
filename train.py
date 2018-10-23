@@ -22,8 +22,8 @@ def train_net(net,
               gpu=False,
               img_scale=0.5):
 
-    dir_img = '/research/pheng5/jzwang/data/resize_train/Train'
-    dir_mask = '/research/pheng5/jzwang/data/resize_train/Train_GroundTruth'
+    dir_img = '/research/pheng5/jzwang/data/resize_train/Train/'
+    dir_mask = '/research/pheng5/jzwang/data/resize_train/Train_GroundTruth/'
     dir_checkpoint = 'checkpoints/'
 
     ids = get_ids(dir_img)
