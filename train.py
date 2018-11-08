@@ -82,7 +82,7 @@ def train_net(net,
             loss = criterion(masks_probs_flat, true_masks_flat)
             epoch_loss += loss.item()
 
-            print('{0:.4f} --- loss: {1:.6f}'.format(i * batch_size / N_train, loss.item()))
+            #print('{0:.4f} --- loss: {1:.6f}'.format(i * batch_size / N_train, loss.item()))
 
             optimizer.zero_grad()
             loss.backward()
@@ -91,9 +91,9 @@ def train_net(net,
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i))
 
         if 1:
-            val_dice = eval_net(net, val, gpu)
+            val_dice,val_jaccard = eval_net(net, val, gpu)
             print('Validation Dice Coeff: {}'.format(val_dice))
-
+            print('Jaccard:: {}'.format(val_jaccard))
         if save_cp:
             torch.save(net.state_dict(),
                        dir_checkpoint + 'CP{}.pth'.format(epoch + 1))
