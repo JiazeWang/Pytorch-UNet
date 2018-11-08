@@ -31,7 +31,8 @@ def eval_net(net, dataset, gpu=False):
         mask_pred = (F.sigmoid(mask_pred) > 0.5).float()
 
         tot += dice_coeff(mask_pred, true_mask).item()
-        mask_pred = mask_pred.numpy()
-        true_mask = true_mask.numpy()
+
+        mask_pred = mask_pred.cpu().numpy()
+        true_mask = true_mask.cpu().numpy()
         total_jaccard += jaccard_distance(mask_pred, true_mask)
     return tot / i, total_jaccard / i
