@@ -94,7 +94,7 @@ def train_net(net,
             val_dice,val_jaccard = eval_net(net, val, gpu)
             print('Validation Dice Coeff: {}'.format(val_dice))
             print('Jaccard:: {}'.format(val_jaccard))
-        if save_cp:
+        if epoch % 10 ==0:
             torch.save(net.state_dict(),
                        dir_checkpoint + 'CP{}.pth'.format(epoch + 1))
             print('Checkpoint {} saved !'.format(epoch + 1))
