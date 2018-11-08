@@ -4,6 +4,12 @@ import numpy as np
 from dice_loss import dice_coeff
 
 
+def jaccard_distance(y_true, y_pred):
+    intersection = torch.sum(torch.abs(y_true * y_pred), axis=-1)
+    sum_ = torch.sum(torch.abs(y_true) + torch.abs(y_pred), axis=-1)
+    jac = (intersection) / (sum_ - intersection)
+    return jac
+
 def eval_net(net, dataset, gpu=False):
     """Evaluation without the densecrf with the dice coefficient"""
     net.eval()
@@ -26,11 +32,3 @@ def eval_net(net, dataset, gpu=False):
         tot += dice_coeff(mask_pred, true_mask).item()
         total_jaccard += jaccard_distance(mask_pred, true_mask)
     return tot / i, total_jaccard / i
-
-
-
-    def jaccard_distance(y_true, y_pred):
-        intersection = torch.sum(torch.abs(y_true * y_pred), axis=-1)
-        sum_ = torch.sum(torch.abs(y_true) + torch.abs(y_pred), axis=-1)
-        jac = (intersection) / (sum_ - intersection)
-        return jac
