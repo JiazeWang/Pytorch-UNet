@@ -28,11 +28,15 @@ def train_net(net,
               save_cp=True,
               gpu=True,
               img_scale=5):
-
+    """
     dir_img = '/research/pheng5/jzwang/data/resize_train/Train/'
     dir_mask = '/research/pheng5/jzwang/data/resize_train/Train_GroundTruth/'
     dir_checkpoint = 'checkpoints/'
+    """
 
+    dir_img = '/research/pheng5/jzwang/data/resize_train/DATA/output/Train_gen/'
+    dir_mask = '/research/pheng5/jzwang/data/resize_train/DATA/output/Groudtruth_Gen/'
+    dir_checkpoint = 'checkpoints/'
     ids = get_ids(dir_img)
     ids = split_ids(ids)
 
@@ -89,13 +93,10 @@ def train_net(net,
 
             loss = criterion(masks_probs_flat, true_masks_flat)
             epoch_loss += loss.item()
-
             #print('{0:.4f} --- loss: {1:.6f}'.format(i * batch_size / N_train, loss.item()))
-
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-
         print('Epoch finished ! Loss: {}'.format(epoch_loss / i))
 
         if epoch % 5 == 0:
