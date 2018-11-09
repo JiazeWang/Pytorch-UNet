@@ -39,34 +39,3 @@ def eval_net(net, dataset, gpu=False):
     m = tot / i
     n = total_jaccard / i
     return m, n
-
-def eval_net_test(net, dataset, gpu=False):
-    """Evaluation without the densecrf with the dice coefficient"""
-    net.eval()
-    tot = 0
-    total_jaccard = 0
-    num = 0
-    for b in enumerate(dataset):
-        #print("i,b:"i,b)
-        num = num + 1
-        img = b[0]
-        true_mask = b[1]
-
-        img = torch.from_numpy(img).unsqueeze(0)
-        true_mask = torch.from_numpy(true_mask).unsqueeze(0)
-
-        if gpu:
-            img = img.cuda()
-            true_mask = true_mask.cuda()
-
-        mask_pred = net(img)[0]
-        mask_pred = (F.sigmoid(mask_pred) > 0.5).float()
-
-        tot += dice_coeff(mask_pred, true_mask).item()
-
-        mask_pred = mask_pred.cpu().numpy()
-        true_mask = true_mask.cpu().numpy()
-        total_jaccard += jaccard_distance(mask_pred, true_mask)
-    m = tot / num
-    n = total_jaccard / num
-    return m, n
