@@ -48,7 +48,6 @@ if __name__ == '__main__':
     iddataset = split_train_val(ids, 0)
     train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
     val_dice,val_jaccard = eval_net(net, train, gpu)
-
     print('Validation Dice Coeff: {}'.format(val_dice))
     print('Jaccard:: {}'.format(val_jaccard))
 

@@ -17,6 +17,7 @@ def eval_net(net, dataset, gpu=False):
     tot = 0
     total_jaccard = 0
     for i, b in enumerate(dataset):
+        print("i,b:"i,b)
         img = b[0]
         true_mask = b[1]
 
@@ -35,4 +36,6 @@ def eval_net(net, dataset, gpu=False):
         mask_pred = mask_pred.cpu().numpy()
         true_mask = true_mask.cpu().numpy()
         total_jaccard += jaccard_distance(mask_pred, true_mask)
-    return tot / i, total_jaccard / i
+    m = tot / i
+    n = total_jaccard / i
+    return m, n
