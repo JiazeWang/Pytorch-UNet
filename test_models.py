@@ -36,11 +36,8 @@ if __name__ == '__main__':
     net = UNet(n_channels=3, n_classes=1)
 
     checkpoint = torch.load(args.load)
-    pretrain_dict = checkpoint['state_dict']
-    model_dict = model.state_dict()
-    pretrain_dict = {k: v for k, v in pretrain_dict.items() if k in model_dict and model_dict[k].size() == v.size()}
-    model_dict.update(pretrain_dict)
-    net.load_state_dict(model_dict)
+    base_dict = {'.'.join(k.split('.')[1:]): v for k,v in list(checkpoint['state_dict'].items())}
+    net.load_state_dict(base_dict)
 
     print('Model loaded from {}'.format(args.load))
     net.cuda()
