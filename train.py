@@ -112,7 +112,7 @@ def train_net(net,
 
 def get_args():
     parser = OptionParser()
-    parser.add_option('-e', '--epochs', dest='epochs', default=30, type='int',
+    parser.add_option('-e', '--epochs', dest='epochs', default=100, type='int',
                       help='number of epochs')
     parser.add_option('-b', '--batch-size', dest='batchsize', default=50,
                       type='int', help='batch size')
