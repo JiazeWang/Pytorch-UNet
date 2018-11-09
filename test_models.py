@@ -46,21 +46,22 @@ if __name__ == '__main__':
     ids = split_ids(ids)
     iddataset = split_train_val(ids, 0)
     train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
-"""
-    for i in enumerate(train):
-        imgs = np.array([i[0]]).astype(np.float32)
-        true_masks = np.array([i[1]])
-        imgs = torch.from_numpy(imgs)
-        true_masks = torch.from_numpy(true_masks)
-        if gpu:
-            imgs = imgs.cuda()
-            true_masks = true_masks.cuda()
-        masks_pred = net(imgs)
-        masks_probs = F.sigmoid(masks_pred)
-        masks_probs_flat = masks_probs.view(-1)
-        true_masks_flat = true_masks.view(-1)
-"""
-    val_dice,val_jaccard = eval_net(net, val, gpu)
+    val_dice,val_jaccard = eval_net(net, train, gpu)
 
     print('Validation Dice Coeff: {}'.format(val_dice))
     print('Jaccard:: {}'.format(val_jaccard))
+
+    """
+        for i in enumerate(train):
+            imgs = np.array([i[0]]).astype(np.float32)
+            true_masks = np.array([i[1]])
+            imgs = torch.from_numpy(imgs)
+            true_masks = torch.from_numpy(true_masks)
+            if gpu:
+                imgs = imgs.cuda()
+                true_masks = true_masks.cuda()
+            masks_pred = net(imgs)
+            masks_probs = F.sigmoid(masks_pred)
+            masks_probs_flat = masks_probs.view(-1)
+            true_masks_flat = true_masks.view(-1)
+    """
