@@ -2,7 +2,7 @@ import sys
 import os
 from optparse import OptionParser
 import numpy as np
-
+import torch.nn.parallel
 import torch
 import torch.backends.cudnn as cudnn
 import torch.nn as nn
@@ -131,6 +131,8 @@ if __name__ == '__main__':
     if args.gpu:
         net.cuda()
         # cudnn.benchmark = True # faster convolutions, but more memory
+
+    net = torch.nn.DataParallel(net)
 
     try:
         train_net(net=net,
