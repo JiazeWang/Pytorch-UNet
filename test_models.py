@@ -34,11 +34,19 @@ def get_args():
 if __name__ == '__main__':
     args = get_args()
     net = UNet(n_channels=3, n_classes=1)
-
+    """
     checkpoint = torch.load(args.load)
     base_dict = {'.'.join(k.split('.')[7:]): v for k,v in list(checkpoint['state_dict'].items())}
     net.load_state_dict(base_dict)
-
+    """
+    checkpoint = torch.load(args.load)
+    state_dict =checkpoint['state_dict']
+    from collections import OrderedDict
+    new_state_dict = OrderedDict()
+    for k, v in state_dict.items():
+        name = k[7:] # remove 'module.' of dataparallel
+        new_state_dict[name]=v
+    model.load_state_dict(new_state_dict)
     print('Model loaded from {}'.format(args.load))
     net.cuda()
     net.eval()
