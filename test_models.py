@@ -39,8 +39,8 @@ if __name__ == '__main__':
     net.cuda()
     net.eval()
 
-    dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data'
-    dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth'
+    dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data/'
+    dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth/'
     img_scale = args.scale
     gpu=args.gpu
     ids = get_ids(dir_img)
