@@ -39,8 +39,7 @@ if __name__ == '__main__':
     base_dict = {'.'.join(k.split('.')[7:]): v for k,v in list(checkpoint['state_dict'].items())}
     net.load_state_dict(base_dict)
     """
-    checkpoint = torch.load(args.load)
-    state_dict =checkpoint['state_dict']
+    state_dict =torch.load(args.load)
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
