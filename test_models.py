@@ -36,7 +36,7 @@ if __name__ == '__main__':
     net = UNet(n_channels=3, n_classes=1)
 
     checkpoint = torch.load(args.load)
-    base_dict = {'.'.join(k.split('.')[1:]): v for k,v in list(checkpoint['state_dict'].items())}
+    base_dict = {'.'.join(k.split('.')[7:]): v for k,v in list(checkpoint['state_dict'].items())}
     net.load_state_dict(base_dict)
 
     print('Model loaded from {}'.format(args.load))
