@@ -34,8 +34,8 @@ def train_net(net,
     dir_checkpoint = 'checkpoints/'
     """
 
-    dir_img = '/research/pheng5/jzwang/data/resize_train/DATA/output/Train_gen/'
-    dir_mask = '/research/pheng5/jzwang/data/resize_train/DATA/output/Groudtruth_Gen/'
+    dir_img = '/research/pheng5/jzwang/data/resize_train/DATA/output/Train_gen_new/'
+    dir_mask = '/research/pheng5/jzwang/data/resize_train/DATA/output/Groudtruth_Gen_new/'
     dir_checkpoint = 'checkpoints/'
     ids = get_ids(dir_img)
     ids = split_ids(ids)
@@ -114,7 +114,7 @@ def get_args():
     parser = OptionParser()
     parser.add_option('-e', '--epochs', dest='epochs', default=30, type='int',
                       help='number of epochs')
-    parser.add_option('-b', '--batch-size', dest='batchsize', default=25,
+    parser.add_option('-b', '--batch-size', dest='batchsize', default=50,
                       type='int', help='batch size')
     parser.add_option('-l', '--learning-rate', dest='lr', default=0.01,
                       type='float', help='learning rate')
