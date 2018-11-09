@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data'
     dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth'
-
+    img_scale = args.scale
     ids = get_ids(dir_img)
     ids = split_ids(ids)
     iddataset = split_train_val(ids, 0)
