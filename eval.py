@@ -20,7 +20,6 @@ def eval_net(net, dataset, gpu=False):
         #print("i,b:"i,b)
         img = b[0]
         true_mask = b[1]
-        if true_mask
 
         img = torch.from_numpy(img).unsqueeze(0)
         true_mask = torch.from_numpy(true_mask).unsqueeze(0)
