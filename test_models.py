@@ -34,11 +34,12 @@ def get_args():
 if __name__ == '__main__':
     args = get_args()
     net = UNet(n_channels=3, n_classes=1)
-    net.load_state_dict(torch.load(args.load))
+    checkpoint = (torch.load(args.load))
+    base_dict = {'.'.join(k.split('.')[1:]): v for k,v in list(checkpoint['state_dict'].items())}
+    net.load_state_dict(base_dict)
     print('Model loaded from {}'.format(args.load))
     net.cuda()
     net.eval()
-
     dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data/'
     dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth/'
     img_scale = args.scale

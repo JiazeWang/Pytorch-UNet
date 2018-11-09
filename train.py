@@ -13,6 +13,13 @@ from eval import eval_net
 from unet import UNet
 from utils import get_ids, split_ids, split_train_val, get_imgs_and_masks, batch
 
+def adjust_learning_rate(optimizer, epoch):
+    if epoch%50== 0:
+        decay = 0.1
+        lr = args.lr * decay
+        for param_group in optimizer.param_groups:
+            param_group['lr'] = param_group['lr'] * decay
+
 def train_net(net,
               epochs=5,
               batch_size=1,
@@ -53,7 +60,8 @@ def train_net(net,
     criterion = nn.BCELoss()
 
     for epoch in range(epochs):
-        print('Starting epoch {}/{}.'.format(epoch + 1, epochs))
+        print('Starting epoch {}/{}.'.format(epoch, epochs))
+        adjust_learning_rate(optimizer, epoch)
         net.train()
 
         # reset the generators
