@@ -48,8 +48,8 @@ if __name__ == '__main__':
     train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
 
 
-    imgs = np.array([i[0] for i in b]).astype(np.float32)
-    true_masks = np.array([i[1] for i in b])
+    imgs = np.array([i[0]]).astype(np.float32)
+    true_masks = np.array([i[1]])
     imgs = torch.from_numpy(imgs)
     true_masks = torch.from_numpy(true_masks)
     if gpu:
