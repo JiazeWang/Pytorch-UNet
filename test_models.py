@@ -45,7 +45,7 @@ if __name__ == '__main__':
     for k, v in state_dict.items():
         name = k[7:] # remove 'module.' of dataparallel
         new_state_dict[name]=v
-    model.load_state_dict(new_state_dict)
+    net.load_state_dict(new_state_dict)
     print('Model loaded from {}'.format(args.load))
     net.cuda()
     net.eval()
