@@ -32,20 +32,20 @@ def get_args():
 
 
 if __name__ == '__main__':
-args = get_args()
-net = UNet(n_channels=3, n_classes=1)
-net.load_state_dict(torch.load(args.load))
-print('Model loaded from {}'.format(args.load))
-net.cuda()
-net.eval()
+    args = get_args()
+    net = UNet(n_channels=3, n_classes=1)
+    net.load_state_dict(torch.load(args.load))
+    print('Model loaded from {}'.format(args.load))
+    net.cuda()
+    net.eval()
 
-dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data'
-dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth'
+    dir_img = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Data'
+    dir_mask = '/research/pheng5/jzwang/data/resize_train/ISIC-2017_Test_v2_Part1_GroundTruth'
 
-ids = get_ids(dir_img)
-ids = split_ids(ids)
-iddataset = split_train_val(ids, 0)
-train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
+    ids = get_ids(dir_img)
+    ids = split_ids(ids)
+    iddataset = split_train_val(ids, 0)
+    train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
 
 
 imgs = np.array([i[0] for i in b]).astype(np.float32)
