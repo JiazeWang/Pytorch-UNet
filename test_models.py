@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch import optim
 
-from eval import eval_net
+from eval import eval_net, eval_net_test
 from unet import UNet
 from utils import get_ids, split_ids, split_train_val, get_imgs_and_masks, batch
 def get_args():
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     ids = split_ids(ids)
     iddataset = split_train_val(ids, 0)
     train = get_imgs_and_masks(iddataset['train'], dir_img, dir_mask, img_scale)
-    val_dice,val_jaccard = eval_net(net, train, gpu)
+    val_dice,val_jaccard = eval_net_test(net, train, gpu)
     print('Validation Dice Coeff: {}'.format(val_dice))
     print('Jaccard:: {}'.format(val_jaccard))
 
